@@ -7,7 +7,9 @@ end
 local formatting = null_ls.builtins.formatting -- to setup formatters
 local diagnostics = null_ls.builtins.diagnostics -- to setup linters
 
--- configure null_ls
+-- to setup format on save
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+-- cconfigure null_ls
 null_ls.setup({
 	-- setup formatters & linters
 	sources = {
@@ -27,14 +29,13 @@ null_ls.setup({
 	-- configure format on save
 	on_attach = function(current_client, bufnr)
 		if current_client.supports_method("textDocument/formatting") then
-      local augroup = "nullls_format_on_save"
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
 					if current_client.name == "null_ls" or current_client.name == "pyright" then
-            vim.lsp.buf.formatting_sync(nil,1000)
+						vim.lsp.buf.formatting_sync(nil, 1000)
 					end
 				end,
 			})
