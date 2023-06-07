@@ -15,17 +15,23 @@ if not typescript_setup then
 	return
 end
 
--- import python plugin safely
-local python_setup, python_lsp = pcall(require, "lspconfig")
-if not python_setup then
-	return
-end
-
--- import java plugin safely
-local java_setup, java_lsp = pcall(lspconfig.jdtls.setup)
-if not java_setup then
-	return
-end
+-- local lspconfig = require("lspconfig")
+-- local python_setup, python_lsp = pcall(lspconfig.pyright.setup)
+-- if not python_setup then
+-- 	return
+-- end
+--
+-- -- import java plugin safely
+-- local java_setup, java_lsp = pcall(lspconfig.jdtls.setup, {})
+-- if not java_setup then
+-- 	return
+-- end
+--
+-- -- Configure Pyright for Python
+-- python_lsp({})
+--
+-- -- Configure JDTLS for Java
+-- java_lsp({})
 
 local keymap = vim.keymap -- for conciseness
 
@@ -70,6 +76,7 @@ end
 lspconfig["pyright"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	filetypes = { "python" },
 })
 
 -- -- configure javascript server
