@@ -48,7 +48,8 @@ mason_null_ls.setup({
 		python = {
 			"black",
 			"isort",
-			"flake8",
+			"mypy",
+			"ruff", -- add ruff
 		},
 		java = {
 			"google-java-format",
@@ -56,3 +57,5 @@ mason_null_ls.setup({
 		},
 	},
 })
+
+
