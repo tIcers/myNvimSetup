@@ -25,6 +25,8 @@ local status, packer = pcall(require, "packer")
 if not status then
 	return
 end
+vim.g.nightflyTransparent = true
+
 
 -- add list of plugins to install
 return packer.startup(function(use)
